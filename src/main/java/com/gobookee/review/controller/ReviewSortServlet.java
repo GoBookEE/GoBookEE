@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gobookee.common.AjaxPageBarTemplate;
-import com.gobookee.review.model.dto.Review;
+import com.gobookee.review.model.dto.ReviewListResponse;
 import com.gobookee.review.service.ReviewService;
 import com.google.gson.Gson;
 
@@ -35,15 +35,15 @@ public class ReviewSortServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			cPage = 1;
 		}
-		int numPerpage = 5;
-		AjaxPageBarTemplate pb = new AjaxPageBarTemplate(cPage, numPerpage, service.reviewCount());
+		int numPerPage = 5;
+		AjaxPageBarTemplate pb = new AjaxPageBarTemplate(cPage, numPerPage, service.reviewCount());
 
-		List<Review> list;
+		List<ReviewListResponse> list;
 		if ("recommend".equals(sort)) {
-			list = service.getAllReviewsByRec(cPage, numPerpage);
+			list = service.getAllReviewsByRec(cPage, numPerPage);
 			System.out.println(list.get(0).getReviewTitle());
 		} else {
-			list = service.getAllReviews(cPage, numPerpage);
+			list = service.getAllReviews(cPage, numPerPage);
 			System.out.println(list.get(0).getReviewTitle());
 		}
 

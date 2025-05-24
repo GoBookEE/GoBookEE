@@ -9,21 +9,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
-public class Review {
+public class ReviewViewResponse {
+	
 	private Long reviewSeq;
 	private String reviewTitle;
 	private String reviewContents;
 	private Timestamp reviewCreateTime;
 	private Integer reviewRate;
-	private Timestamp reviewDeleteTime;
 	private Timestamp reviewEditTime;
-	private char reviewIsPublic;
-	private Long userSeq;
-	private Long bookSeq;
-	
+	private List<CommentsViewResponse> comments;
+
+	private String bookTitle;
+	private String bookAuthor;
+	private String bookPublisher;
+	private String bookCover;
+
+	private Integer recommendCount;
+	private Integer bookReviewCount;
+	private Double bookAvgRate;
+	private Integer nonRecommendCount;
+
 }
