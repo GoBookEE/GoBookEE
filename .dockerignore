@@ -1,0 +1,35 @@
+# Git 관련
+.git
+.gitignore
+README.md
+
+# IDE 관련
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Maven 관련
+target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# 로그 파일
+*.log
+logs/
+
+# 임시 파일
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Docker 관련
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# 설정 파일 (보안상 제외)
+src/main/resources/config/*.properties

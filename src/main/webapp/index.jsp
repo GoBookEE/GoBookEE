@@ -127,7 +127,7 @@
     <% rank++;
     } %>
     <div class="fw-bold d-flex justify-content-between align-items-center" style="padding: 20px 30px 0 20px;">
-        <div style="font-size: 20px;color: #50A65D">따끈따끈한 리뷰! 🔥</div>
+        <div style="font-size: 20px;color: #50A65D">따끈따끈한 리뷰!🔥</div>
         <div style="font-size: 14px; cursor: pointer;"
              onclick="location.assign('<%=request.getContextPath()%>/review/listpage')">더보기<i
                 style="font-size: 14px;padding-left: 5px;" class="bi bi-chevron-right"></i>
