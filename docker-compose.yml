@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  # GoBookEE 웹 애플리케이션
+  gobookee-app:
+    build: .
+    container_name: gobookee-app
+    ports:
+      - "8080:8080"
+    environment:
+      # 외부 오라클 데이터베이스 연결 설정
+      - DB_HOST=${DB_HOST:-your-oracle-host.com}
+      - DB_PORT=${DB_PORT:-1521}
+      - DB_SID=${DB_SID:-XE}
+      - DB_USERNAME=${DB_USERNAME:-your-username}
+      - DB_PASSWORD=${DB_PASSWORD:-your-password}
+      # 메일 설정
+      - MAIL_HOST=${MAIL_HOST:-smtp.gmail.com}
+      - MAIL_PORT=${MAIL_PORT:-587}
+      - MAIL_USERNAME=${MAIL_USERNAME:-your-email@gmail.com}
+      - MAIL_PASSWORD=${MAIL_PASSWORD:-your-app-password}
+    volumes:
+      # 업로드 파일 영구 저장
+      - gobookee-uploads:/usr/local/tomcat/webapps/ROOT/resources/upload
+      # 로그 파일 저장
+      - gobookee-logs:/usr/local/tomcat/logs
+    restart: unless-stopped
+    networks:
+      - gobookee-network
+
+  # Nginx 리버스 프록시 (선택사항)
+  nginx:
+    image: nginx:alpine
+    container_name: gobookee-nginx
+    ports:
+      - "8081:80"
+      - "8443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - gobookee-app
+    restart: unless-stopped
+    networks:
+      - gobookee-network
+
+volumes:
+  gobookee-uploads:
+    driver: local
+  gobookee-logs:
+    driver: local
+
+networks:
+  gobookee-network:
+    driver: bridge
